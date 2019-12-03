@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy], defaults: { format: :json }
   post 'sessions/current_user', to: 'sessions#current_user', defaults: { format: :json }
+  post 'sessions/charge_credit', to: 'sessions#charge_credit', defaults: { format: :json }
 
   resources :users, only: [:create], defaults: { format: :json }
   resources :buses, only: [:create], defaults: { format: :json }

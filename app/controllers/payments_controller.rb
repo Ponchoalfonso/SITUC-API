@@ -1,11 +1,18 @@
 class PaymentsController < ApplicationController
   def create
     @payment = Payment.new(payment_params)
-    
-    if @payment.save
-      render :create
+    user = User.find(@payment.user_id)
+
+    if user&.credit >= @payment.amount
+      if @payment.save
+        user.credit = user.credit - @payment.amount
+        user.save
+        render :create
+      else
+        head(:unprocessable_entity)
+      end
     else
-      head(:unprocessable_entity)
+      render json: {message: 'Not enough credit.'}, status: 403
     end
   end
 

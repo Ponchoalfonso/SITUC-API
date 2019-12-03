@@ -1,8 +1,6 @@
 class BusesController < ApplicationController
   def create
     @bus = Bus.new(bus_params)
-
-    byebug
     
     if @bus.save
       render :create

@@ -1,3 +1,1 @@
-json.bus do
-  @bus
-end
+json.bus @bus
