@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # devise_for :users
 
   resources :sessions, only: [:create, :destroy], defaults: { format: :json }
+  post 'sessions/current_user', to: 'sessions#current_user', defaults: { format: :json }
+
   resources :users, only: [:create], defaults: { format: :json }
   resources :buses, only: [:create], defaults: { format: :json }
   resources :payments, only: [:create], defaults: { format: :json }

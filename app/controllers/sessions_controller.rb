@@ -9,6 +9,13 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
+  def current_user
+    @user = User.where(authentication_token: params[:authentication_token]).first
+
+    if @user != nil
+      render :current_user
+    else
+      head(:unauthorized)
+    end
   end
 end
